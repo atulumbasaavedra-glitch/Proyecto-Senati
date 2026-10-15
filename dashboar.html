@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Control de horarios</title>
+<link rel="icon" type="image/png" href="assets/image/image2.png">
+
+<style>
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #d9d9d9;
+}
+
+body {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+}
+
+/* ---------- PANTALLA: ocupa todo el dispositivo ---------- */
+.f {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #d9d9d9;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+}
+
+/* ---------- BARRA AZUL ---------- */
+.b {
+  height: clamp(64px, 3vw + 63px, 100px);
+  padding: 0 clamp(12px, 3vw, 60px);
+  background: #0a8bff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lg {
+  height: clamp(36px, 2vw + 34px, 64px);
+  width: auto;
+  max-width: 45%;
+  object-fit: contain;
+}
+
+.ic {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 3vw, 32px);
+}
+
+.mn { width: clamp(32px, 1.5vw + 34px, 52px); height: auto; }
+.cz { width: clamp(22px, 1vw + 24px, 36px);   height: auto; }
+
+/* ---------- TÍTULO ---------- */
+.t {
+  width: clamp(min(300px, 94vw), 82vw, 860px);
+  min-height: clamp(59px, 3vw + 48px, 96px);
+  margin: clamp(40px, 12vh, 110px) auto 0;
+  padding: 8px 8% 8px 0;
+  background: rgba(0, 195, 208, 0.3);
+  color: #000;
+  font-size: clamp(15px, 0.9vw + 14.5px, 30px);
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- TABLA ---------- */
+table {
+  width: clamp(min(290px, 94vw), 78vw, 820px);
+  margin: clamp(18px, 3vh, 32px) auto 0;
+  background: #d9d9d9;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+th {
+  height: clamp(29px, 1vw + 25px, 46px);
+  padding: 0;
+  background: #00c2e8;
+  color: #fff;
+  font-weight: 400;
+  font-size: clamp(11px, 0.6vw + 10px, 18px);
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #000;
+}
+
+td {
+  height: clamp(40px, 2vw + 34px, 60px);
+  padding: 0;
+  vertical-align: middle;
+  border: 1px solid #000;
+}
+
+/* ---------- CUADROS PARA ESCRIBIR ---------- */
+input {
+  display: block;
+  width: 100%;
+  height: clamp(38px, 2vw + 32px, 58px);
+  margin: 0;
+  padding: 0 4px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: clamp(12px, 0.5vw + 12px, 18px);
+  text-align: center;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* ---------- BOTÓN CERRAR SESIÓN (vidrio celeste) ---------- */
+.c {
+  width: clamp(180px, 16vw, 280px);
+  max-width: 80%;
+  height: clamp(40px, 1vw + 36px, 52px);
+  margin: clamp(22px, 4vh, 36px) auto 0;
+  border-radius: 999px;
+  background: rgba(0, 194, 232, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(0, 150, 200, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  color: #000;
+  font-size: clamp(14px, 0.4vw + 12.5px, 17px);
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+</head>
+<body>
+
+<div class="f">
+
+  <div class="b">
+    <img class="lg" src="assets/image/logo2.png" alt="">
+
+    <div class="ic">
+      <svg class="mn" viewBox="0 0 40 36" fill="#fff">
+        <rect x="0"  y="0"    width="10" height="10"/>
+        <rect x="16" y="3.5"  width="24" height="3"/>
+        <rect x="0"  y="13"   width="10" height="10"/>
+        <rect x="16" y="16.5" width="24" height="3"/>
+        <rect x="0"  y="26"   width="10" height="10"/>
+        <rect x="16" y="29.5" width="24" height="3"/>
+      </svg>
+
+      <svg class="cz" viewBox="0 0 28 25" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round">
+        <path d="M1 1 V24 L14 12.5 Z"/>
+        <path d="M27 1 V24 L14 12.5 Z"/>
+      </svg>
+    </div>
+  </div>
+
+  <h1 class="t">CONTROL DE HORARIOS DEL<br>PERSONAL</h1>
+
+  <table>
+    <colgroup>
+      <col style="width:31%">
+      <col style="width:36%">
+      <col style="width:33%">
+    </colgroup>
+    <tr>
+      <th>colaborador</th>
+      <th>Entrada</th>
+      <th>Salida</th>
+    </tr>
+    <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+    <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+  </table>
+
+  <a class="c" href="index.html">CERRAR SESIÓN</a>
+
+</div>
+
+</body>
+</html>

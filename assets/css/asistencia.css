@@ -1,0 +1,207 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body { 
+  margin: 0; 
+  padding: 0; 
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: #0a4fd1 !important;
+  font-family: Inter, Arial, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* =====================================================
+   ESTRUCTURA GENERAL Y RESPONSIVA
+   ===================================================== */
+.frame {
+  --logo: min(283px, 72vw, 38vh);
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: calc(var(--logo) * 0.07) 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@supports (height: 100dvh) {
+  .frame { --logo: min(283px, 72vw, 38dvh); }
+}
+
+.cont {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--logo) * 0.064);
+  width: 100%;
+  max-width: 600px;
+}
+
+.izq {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--logo) * 0.05);
+}
+
+.centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  width: var(--logo);
+  height: calc(var(--logo) * 0.389);
+  object-fit: cover;
+}
+
+.avatar {
+  width: calc(var(--logo) * 0.731);
+  height: calc(var(--logo) * 0.731);
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.nombre {
+  max-width: 92vw;
+  margin: 0 0 calc(var(--logo) * 0.042);
+  text-align: center;
+  color: #FFFFFF;
+  font-size: clamp(12px, calc(var(--logo) * 0.05), 24px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* =====================================================
+   VISOR Y CÁMARA
+   ===================================================== */
+.visor {
+  --v: calc(var(--logo) * 0.968);
+  position: relative;
+  width: var(--v);
+  height: var(--v);
+  flex-shrink: 0;
+}
+
+.foto,
+.cam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: calc(var(--v) * 0.0255) solid #FFFFFF;
+  border-radius: calc(var(--v) * 0.095);
+  box-sizing: border-box;
+}
+
+.cam { 
+  transform: scaleX(-1); 
+  display: none; 
+}
+
+/* =====================================================
+   ESCÁNER HUD
+   ===================================================== */
+.scan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--v) * 0.095);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.c {
+  position: absolute;
+  width: calc(var(--v) * 0.124);
+  height: calc(var(--v) * 0.124);
+  border: 0 solid #00E5FF;
+}
+
+.tl { 
+  top: calc(var(--v) * 0.0657); 
+  left: calc(var(--v) * 0.0657);
+  border-width: calc(var(--v) * 0.0146) 0 0 calc(var(--v) * 0.0146);
+  border-top-left-radius: calc(var(--v) * 0.051); 
+}
+
+.tr { 
+  top: calc(var(--v) * 0.0657); 
+  right: calc(var(--v) * 0.0657);
+  border-width: calc(var(--v) * 0.0146) calc(var(--v) * 0.0146) 0 0;
+  border-top-right-radius: calc(var(--v) * 0.051); 
+}
+
+.bl { 
+  bottom: calc(var(--v) * 0.0657); 
+  left: calc(var(--v) * 0.0657);
+  border-width: 0 0 calc(var(--v) * 0.0146) calc(var(--v) * 0.0146);
+  border-bottom-left-radius: calc(var(--v) * 0.051); 
+}
+
+.br { 
+  bottom: calc(var(--v) * 0.0657); 
+  right: calc(var(--v) * 0.0657);
+  border-width: 0 calc(var(--v) * 0.0146) calc(var(--v) * 0.0146) 0;
+  border-bottom-right-radius: calc(var(--v) * 0.051); 
+}
+
+.linea {
+  position: absolute;
+  left: calc(var(--v) * 0.0255);
+  right: calc(var(--v) * 0.0255);
+  top: calc(var(--v) * 0.0255);
+  height: calc(var(--v) * 0.0146);
+  background: linear-gradient(90deg, transparent, #00E5FF, transparent);
+  box-shadow: 0 0 14px 4px rgba(0, 229, 255, .7);
+  animation: sube-baja 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes sube-baja {
+  to { top: calc(100% - var(--v) * 0.0401); }
+}
+
+/* =====================================================
+   TABLET Y MONITOR (Diseño Responsivo)
+   ===================================================== */
+@media (min-width: 768px) {
+  .frame { --logo: min(420px, 60vw, 38vh); }
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+  .frame { --logo: min(34vw, 46vh, 420px); }
+  .cont {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    gap: calc(var(--logo) * 0.2);
+  }
+  .visor { --v: calc(var(--logo) * 1.2); }
+}
+
+@media (min-width: 1200px) {
+  .frame { --logo: min(30vw, 50vh, 560px); }
+  .cont {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    gap: calc(var(--logo) * 0.22);
+  }
+  .visor { --v: calc(var(--logo) * 1.2); }
+}
